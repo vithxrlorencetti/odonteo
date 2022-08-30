@@ -4,30 +4,67 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 form {
   display: flex;
   padding: 50px;
   margin: 0px;
+  margin-bottom: 30px;
   justify-content: center;
-  background-color: #4e79869c;
+  background-color: #4e79869a;
   border-radius: 15px;
+  align-items: center;
+}
+
+label {
+  padding: 0px 15px 0px 15px;
+  font-size: 17px;
 }
 
 .form-input {
-  text-indent: 12px;
+  margin-top: 10px;
+  text-indent: 20px;
   font-size: 16px;
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
   height: 28px;
   border-radius: 25px;
   border: none;
+  outline: none;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+::placeholder {
+  color: rgb(41, 40, 40);
+  font-size: 15px;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+}
+
+.main-page-button {
+  background-color: #46D0FA;
+  padding: 8px 15px 8px 15px;
+  color: #184654;
+  border-radius: 15px;
+  border: none;
+  font-size: 16px;
+  font-weight: 550;
+  cursor: pointer;
+}
+
+#register-button {
+  margin-left: 20px;
+}
+
+#extract-button {
+  margin-top: 25px;
 }
