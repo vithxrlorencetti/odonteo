@@ -9,7 +9,7 @@ function Main() {
     <main>
       <form>
         <label htmlFor='amount'>
-          Quantia a ser paga:
+          Quantia a receber:
           <input
             id='amount'
             className='form-input'
@@ -35,6 +35,16 @@ function Main() {
             className='form-input'
             name='billing-day'
             type='number'
+            placeholder='ex. 15'
+          />
+        </label>
+        <label htmlFor='first-installment-date'>
+          Data da primeira parcela:
+          <input
+            id='first-installment-date'
+            className='form-input'
+            name='first-installment-date'
+            type='date'
             placeholder='ex. 15'
           />
         </label>

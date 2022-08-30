@@ -9,9 +9,9 @@ main {
 
 form {
   display: flex;
-  padding: 50px;
+  padding: 3em;
   margin: 0px;
-  margin-bottom: 30px;
+  margin-bottom: 2.5em;
   justify-content: center;
   background-color: #4e79869a;
   border-radius: 15px;
@@ -28,11 +28,11 @@ label {
   text-indent: 20px;
   font-size: 16px;
   display: flex;
-  flex-direction: column;
   height: 28px;
   border-radius: 25px;
   border: none;
   outline: none;
+  width: 160px;
 }
 
 input::-webkit-outer-spin-button,
@@ -48,6 +48,10 @@ input::-webkit-inner-spin-button {
 
 input:focus::placeholder {
   opacity: 0;
+}
+
+#first-installment-date {
+  text-indent: 5px;
 }
 
 .main-page-button {
@@ -67,4 +71,47 @@ input:focus::placeholder {
 
 #extract-button {
   margin-top: 25px;
+}
+
+@media only screen and (max-width: 1144px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0px 10px 0px;
+  }
+
+  #register-button {
+    margin: 30px 0px 0px 0px;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  form {
+    margin-bottom: 16px;
+  }
+}
+
+@media only screen and (max-height: 568px) {
+  form {
+    margin-bottom: 0px;
+    padding: 1.5em;
+  }
+}
+
+@media only screen and (max-height: 508px) {
+  main {
+    flex-direction: row;
+  }
+
+  form {
+    margin-right: 15px;
+    padding: 0.5em;
+  }
 }
