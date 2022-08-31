@@ -1,9 +1,21 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Main.css';
 
 function Main() {
+  const [chargingInformation, setChargingInformation] = useState({});
+  const [validInformation, setValidInformation] = useState(false);
 
   const navigate = useNavigate();
+
+  function handleChange({ target: { name, value } }) {
+    setChargingInformation((oldState) => {
+      return ({
+        ...oldState,
+        [name]: value,
+      });
+    });
+  }
 
   return (
     <main>
@@ -13,9 +25,10 @@ function Main() {
           <input
             id='amount'
             className='form-input'
-            name='payment-amount'
+            name='paymentAmount'
             type='number'
             placeholder='ex. 3500.50'
+            onChange={handleChange}
           />
         </label>
         <label htmlFor='installments'>
@@ -23,9 +36,10 @@ function Main() {
           <input
             id='installments'
             className='form-input'
-            name='number-of-installments'
+            name='numberOfInstallments'
             type='number'
             placeholder='ex. 2'
+            onChange={handleChange}
           />
         </label>
         <label htmlFor='billing-day'>
@@ -33,9 +47,10 @@ function Main() {
           <input
             id='billing-day'
             className='form-input'
-            name='billing-day'
+            name='billingDay'
             type='number'
             placeholder='ex. 15'
+            onChange={handleChange}
           />
         </label>
         <label htmlFor='first-installment-date'>
@@ -43,15 +58,17 @@ function Main() {
           <input
             id='first-installment-date'
             className='form-input'
-            name='first-installment-date'
+            name='firstInstallmentDate'
             type='date'
-            placeholder='ex. 15'
+            placeholder='dd-mm-yyyy'
+            onChange={handleChange}
           />
         </label>
         <button
           type='button'
           className='main-page-button'
           id='register-button'
+          onClick={() => console.log(chargingInformation)}
         >
           Registrar cobrança
         </button>
