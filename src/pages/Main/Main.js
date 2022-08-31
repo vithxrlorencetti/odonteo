@@ -4,8 +4,6 @@ import './Main.css';
 
 function Main() {
   const [chargingInformation, setChargingInformation] = useState({});
-  const [validInformation, setValidInformation] = useState(false);
-
   const navigate = useNavigate();
 
   function handleChange({ target: { name, value } }) {
@@ -15,6 +13,34 @@ function Main() {
         [name]: value,
       });
     });
+  }
+
+  function isInformationValid() {
+    const {
+      paymentAmount,
+      numberOfInstallments,
+      billingDay,
+      firstInstallmentDate
+    } = chargingInformation;
+
+    const validAmount = parseFloat(paymentAmount) > 0;
+    const validInstallmentNum = parseInt(numberOfInstallments, 10) > 0 && Number.isInteger(Number(numberOfInstallments));
+    let validBillingDay = parseInt(billingDay, 10) > 0 && parseInt(billingDay, 10) < 32 && Number.isInteger(Number(billingDay));
+    const validInstallmentDate = firstInstallmentDate && parseInt(firstInstallmentDate.split('-')[0], 10) >= 1960;
+
+    if (numberOfInstallments === '1') {
+      validBillingDay = true;
+    }
+
+    return validAmount && validInstallmentNum && validInstallmentDate && validBillingDay;
+  }
+
+  function register() {
+    if (isInformationValid()) {
+      console.log(chargingInformation);
+    } else {
+      console.log('Formato incorreto');
+    }
   }
 
   return (
@@ -50,6 +76,7 @@ function Main() {
             name='billingDay'
             type='number'
             placeholder='ex. 15'
+            disabled={chargingInformation.numberOfInstallments === '1'}
             onChange={handleChange}
           />
         </label>
@@ -68,7 +95,7 @@ function Main() {
           type='button'
           className='main-page-button'
           id='register-button'
-          onClick={() => console.log(chargingInformation)}
+          onClick={register}
         >
           Registrar cobrança
         </button>
