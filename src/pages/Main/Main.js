@@ -4,6 +4,8 @@ import './Main.css';
 
 function Main() {
   const [chargingInformation, setChargingInformation] = useState({});
+  const [message, setMessage] = useState({ show: false, text: '' });
+
   const navigate = useNavigate();
 
   function handleChange({ target: { name, value } }) {
@@ -36,15 +38,32 @@ function Main() {
   }
 
   function register() {
+    let text = 'Informações em formato incorreto.';
+
     if (isInformationValid()) {
-      console.log(chargingInformation);
-    } else {
-      console.log('Formato incorreto');
+      text = 'Registro efetuado com sucesso!';
     }
+
+    setMessage({
+      show: true,
+      text,
+    });
+
+    setTimeout(() => {
+      setMessage({
+        show: false,
+        text: '',
+      })
+    }, 2000);
+
   }
 
   return (
     <main>
+      { message.show &&
+        <div id='message' >
+          <p>{ message.text }</p>
+        </div> }
       <form>
         <label htmlFor='amount'>
           Quantia a receber:
