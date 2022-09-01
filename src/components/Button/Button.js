@@ -1,10 +1,10 @@
 import './Button.css';
 
-function Button({ onClickFunction, children, id }) {
+function Button({ onClickFunction, children, id, addClassName }) {
   return (
     <button
       type='button'
-      className='standard-button'
+      className={`standard-button ${addClassName}`}
       onClick={onClickFunction}
       id={id}
     >
