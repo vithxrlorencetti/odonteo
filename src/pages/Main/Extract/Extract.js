@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../../components/Button/Button';
 import './Extract.css';
 
 function Extract() {
@@ -7,14 +7,12 @@ function Extract() {
 
   return (
     <main>
-      <button
-        type='button'
-        className='main-page-button'
-        id='extract-button'
-        onClick={() => navigate('/')}
+      <Button
+        id='go-back-button'
+        onClickFunction={() => navigate('/')}
       >
         Voltar
-      </button>
+      </Button>
     </main>
   );
 }

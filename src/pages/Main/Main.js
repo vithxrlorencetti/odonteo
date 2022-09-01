@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button/Button';
 import './Main.css';
 
 function Main() {
@@ -111,23 +112,19 @@ function Main() {
             onChange={handleChange}
           />
         </label>
-        <button
-          type='button'
-          className='main-page-button'
+        <Button
           id='register-button'
-          onClick={register}
+          onClickFunction={register}
         >
           Registrar cobrança
-        </button>
+        </Button>
       </form>
-      <button
-        type='button'
-        className='main-page-button'
+      <Button
         id='extract-button'
-        onClick={() => navigate('/extract')}
+        onClickFunction={() => navigate('/extract')}
       >
         Ver extrato
-      </button>
+      </Button>
     </main>
   );
 }

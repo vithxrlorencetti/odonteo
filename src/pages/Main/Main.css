@@ -54,17 +54,6 @@ input:focus::placeholder {
   text-indent: 5px;
 }
 
-.main-page-button {
-  background-color: #46D0FA;
-  padding: 8px 15px 8px 15px;
-  color: #184654;
-  border-radius: 15px;
-  border: none;
-  font-size: 16px;
-  font-weight: 550;
-  cursor: pointer;
-}
-
 #register-button {
   margin-left: 20px;
 }
