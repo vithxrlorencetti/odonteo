@@ -42,6 +42,7 @@ function Main() {
 
     if (isInformationValid()) {
       text = 'Registro efetuado com sucesso!';
+      localStorage.setItem('chargingInformation', JSON.stringify(chargingInformation));
     }
 
     setMessage({
