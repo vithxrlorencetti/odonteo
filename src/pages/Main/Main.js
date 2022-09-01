@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import { handleChange } from '../../utils/handleChange';
 import './Main.css';
 
 function Main() {
@@ -8,15 +9,6 @@ function Main() {
   const [message, setMessage] = useState({ show: false, text: '' });
 
   const navigate = useNavigate();
-
-  function handleChange({ target: { name, value } }) {
-    setChargingInformation((oldState) => {
-      return ({
-        ...oldState,
-        [name]: value,
-      });
-    });
-  }
 
   function isInformationValid() {
     const {
@@ -75,7 +67,7 @@ function Main() {
             name='paymentAmount'
             type='number'
             placeholder='ex. 3500.50'
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, setChargingInformation)}
           />
         </label>
         <label htmlFor='installments'>
@@ -86,7 +78,7 @@ function Main() {
             name='numberOfInstallments'
             type='number'
             placeholder='ex. 2'
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, setChargingInformation)}
           />
         </label>
         <label htmlFor='billing-day'>
@@ -98,30 +90,31 @@ function Main() {
             type='number'
             placeholder='ex. 15'
             disabled={chargingInformation.numberOfInstallments === '1'}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, setChargingInformation)}
           />
         </label>
         <label htmlFor='first-installment-date'>
           Data da primeira parcela:
           <input
             id='first-installment-date'
-            className='form-input'
+            className='form-input date'
             name='firstInstallmentDate'
             type='date'
             placeholder='dd-mm-yyyy'
-            onChange={handleChange}
+            onChange={(e) => handleChange(e, setChargingInformation)}
           />
         </label>
         <Button
           id='register-button'
           onClickFunction={register}
+          addClassName='form-button'
         >
           Registrar cobrança
         </Button>
       </form>
       <Button
-        id='extract-button'
-        onClickFunction={() => navigate('/extract')}
+        id='go-to-statement-button'
+        onClickFunction={() => navigate('/statement')}
       >
         Ver extrato
       </Button>

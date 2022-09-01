@@ -50,15 +50,11 @@ input:focus::placeholder {
   opacity: 0;
 }
 
-#first-installment-date {
+.date {
   text-indent: 5px;
 }
 
-#register-button {
-  margin-left: 20px;
-}
-
-#extract-button {
+#go-to-statement-button {
   margin-top: 25px;
 }
 
@@ -74,10 +70,6 @@ input:focus::placeholder {
     flex-direction: column;
     align-items: center;
     margin: 10px 0px 10px 0px;
-  }
-
-  #register-button {
-    margin: 30px 0px 0px 0px;
   }
 }
 
