@@ -6,11 +6,21 @@ import './Statement.css';
 
 function Statement() {
   const [datesOfStatement, setDatesOfStatement] = useState({});
+  const [renderStatement, setRenderStatement] = useState(false);
+  const [totalIncome, setTotalIncome] = useState(0);
   const navigate = useNavigate();
-  const chargingInformation = [JSON.parse(localStorage.getItem('chargingInformation'))];
+  const installmentDetails = JSON.parse(localStorage.getItem('installmentDetails'));
 
-  function showStatement() {
-    
+  function checkIncome() {
+    const { beginningDate, endingDate } = datesOfStatement;
+    setTotalIncome(0);
+
+    installmentDetails.forEach(({ dates, installmentValue }) => {
+      const datesInInterval = dates.filter((date) => Date.parse(date) >= Date.parse(beginningDate) && Date.parse(date) <= Date.parse(endingDate));
+      setTotalIncome((oldState) => Math.floor(oldState + (datesInInterval.length * installmentValue) * 100) / 100);
+    });
+
+    setRenderStatement(true);
   }
 
   return (
@@ -38,11 +48,24 @@ function Statement() {
         </label>
         <Button
           addClassName='form-button'
-          onClickFunction={showStatement}
+          onClickFunction={checkIncome}
         >
           Consultar faturamento
         </Button>
       </form>
+      {renderStatement &&
+        <table>
+          <thead>
+            <tr>
+              <th>total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{totalIncome}</td>
+            </tr>
+          </tbody>
+        </table>}
       <Button
         id='go-back-button'
         onClickFunction={() => navigate('/')}
