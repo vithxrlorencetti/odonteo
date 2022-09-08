@@ -1,28 +1,3 @@
-main {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-form {
-  display: flex;
-  padding: 3em;
-  margin: 0px;
-  margin-bottom: 2.5em;
-  justify-content: center;
-  background-color: #4e79869a;
-  border-radius: 15px;
-  align-items: center;
-}
-
-label {
-  padding: 0px 15px 0px 15px;
-  font-size: 17px;
-}
-
 .form-input {
   margin-top: 10px;
   text-indent: 20px;
@@ -56,43 +31,4 @@ input:focus::placeholder {
 
 #go-to-statement-button {
   margin-top: 25px;
-}
-
-@media only screen and (max-width: 1144px) {
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px 0px 10px 0px;
-  }
-}
-
-@media only screen and (max-width: 280px) {
-  form {
-    margin-bottom: 16px;
-  }
-}
-
-@media only screen and (max-height: 568px) {
-  form {
-    margin-bottom: 0px;
-    padding: 1.5em;
-  }
-}
-
-@media only screen and (max-height: 508px) {
-  main {
-    flex-direction: row;
-  }
-
-  form {
-    margin-right: 15px;
-    padding: 0.5em;
-  }
 }
