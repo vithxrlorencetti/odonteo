@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import { handleChange } from '../../utils/handleChange';
@@ -9,14 +9,34 @@ function Statement() {
   const [renderStatement, setRenderStatement] = useState(false);
   const [totalIncome, setTotalIncome] = useState(0);
   const navigate = useNavigate();
-  const installmentDetails = JSON.parse(localStorage.getItem('installmentDetails'));
+  const [incomeDetails, setIncomeDetails] = useState([]);
+
+  useEffect(() => {
+    async function getIncome() {
+      const headers = {
+        'Content-Type': 'application/json'
+      }
+      
+      const options = {
+        method: 'GET',
+        headers
+      }
+  
+      const { income } = await fetch('http://localhost:3000/income/1', options)
+        .then((response) => response.json())
+  
+      setIncomeDetails(income);
+    }
+
+    getIncome();
+  }, []);
 
   function checkIncome() {
     const { beginningDate, endingDate } = datesOfStatement;
     setTotalIncome(0);
 
-    installmentDetails.forEach(({ dates, installmentValue }) => {
-      const datesInInterval = dates.filter((date) => Date.parse(date) >= Date.parse(beginningDate) && Date.parse(date) <= Date.parse(endingDate));
+    incomeDetails.forEach(({ dates, installmentValue }) => {
+      const datesInInterval = JSON.parse(dates).filter((date) => Date.parse(date) >= Date.parse(beginningDate) && Date.parse(date) <= Date.parse(endingDate));
       setTotalIncome((oldState) => Math.floor(oldState + (datesInInterval.length * installmentValue) * 100) / 100);
     });
 
