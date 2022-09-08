@@ -68,7 +68,7 @@ function Main() {
         headers
       }
 
-      text = await fetch('http://localhost:3000/income', options)
+      text = await fetch('https://odonteo-backend.herokuapp.com/income', options)
         .then((response) => response.json())
         .then(({ message }) => message);
     }

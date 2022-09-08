@@ -22,7 +22,7 @@ function Statement() {
         headers
       }
   
-      const { income } = await fetch('http://localhost:3000/income/1', options)
+      const { income } = await fetch('https://odonteo-backend.herokuapp.com/income/1', options)
         .then((response) => response.json())
   
       setIncomeDetails(income);
