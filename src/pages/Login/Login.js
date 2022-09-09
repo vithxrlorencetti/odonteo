@@ -7,7 +7,10 @@ import { handleChange } from '../../utils/handleChange';
 import showMessage from '../../utils/showMessage';
 
 function Login() {
-  const [loginInformation, setLoginInformation] = useState({});
+  const [loginInformation, setLoginInformation] = useState({
+    email: '',
+    password: ''
+  });
   const [message, setMessage] = useState({ show: false, text: '' });
 
   const navigate = useNavigate();
