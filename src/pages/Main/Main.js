@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Message from '../../components/Message/Message';
+import fetchApi from '../../utils/fetch';
 import { handleChange } from '../../utils/handleChange';
 import parseInstallmentDetails from '../../utils/parseInstallmentDetails';
+import showMessage from '../../utils/showMessage';
 import './Main.css';
 
 function Main() {
@@ -23,6 +25,8 @@ function Main() {
 
   const [message, setMessage] = useState({ show: false, text: '' });
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const navigate = useNavigate();
 
   function isInformationValid() {
@@ -39,11 +43,9 @@ function Main() {
   }
 
   async function register() {
-    let text;
-    // let text = 'Informações em formato incorreto.';
+    let text = 'Informações em formato incorreto.';
 
     if (isInformationValid()) {
-      // text = 'Registro efetuado com sucesso!';
       const installmentDetails = parseInstallmentDetails(
         paymentAmount,
         numberOfInstallments,
@@ -54,37 +56,20 @@ function Main() {
       const body = {
         income: {
           ...installmentDetails,
-          userId: 1
+          userId: user.id
         }
-      }
-
-      const headers = {
-        'Content-Type': 'application/json'
       }
       
       const options = {
         method: 'POST',
-        body: JSON.stringify(body),
-        headers
+        body: JSON.stringify(body)
       }
 
-      text = await fetch('https://odonteo-backend.herokuapp.com/income', options)
-        .then((response) => response.json())
+      text = await fetchApi('https://odonteo-backend.herokuapp.com/income', options)
         .then(({ message }) => message);
     }
 
-    setMessage({
-      show: true,
-      text,
-    });
-
-    setTimeout(() => {
-      setMessage({
-        show: false,
-        text: '',
-      })
-    }, 2000);
-
+    showMessage(setMessage, text);
   }
 
   return (

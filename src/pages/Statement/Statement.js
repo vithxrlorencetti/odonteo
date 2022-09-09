@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import fetchApi from '../../utils/fetch';
 import { handleChange } from '../../utils/handleChange';
 import './Statement.css';
 
@@ -11,25 +12,21 @@ function Statement() {
   const navigate = useNavigate();
   const [incomeDetails, setIncomeDetails] = useState([]);
 
+  const user = JSON.parse(localStorage.getItem('user'));
+
   useEffect(() => {
     async function getIncome() {
-      const headers = {
-        'Content-Type': 'application/json'
-      }
-      
       const options = {
-        method: 'GET',
-        headers
+        method: 'GET'
       }
   
-      const { income } = await fetch('https://odonteo-backend.herokuapp.com/income/1', options)
-        .then((response) => response.json())
+      const { income } = await fetchApi(`https://odonteo-backend.herokuapp.com/income/${user.id}`, options);
   
       setIncomeDetails(income);
     }
 
     getIncome();
-  }, []);
+  }, [user]);
 
   function checkIncome() {
     const { beginningDate, endingDate } = datesOfStatement;
@@ -56,7 +53,7 @@ function Statement() {
             onChange={(e) => handleChange(e, setDatesOfStatement)}
           />
         </label>
-        <label htmlFor='beginning-date'>
+        <label htmlFor='ending-date'>
           Data de fim:
           <input
             className='form-input date'
