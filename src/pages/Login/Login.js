@@ -16,6 +16,22 @@ function Login() {
   const navigate = useNavigate();
 
   async function makeLogin() {
+    const validateEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // ^ Regex extraído da seguinte fonte: https://stackoverflow.com/questions/46155/how-can-i-validate-an-email-address-in-javascript
+
+    function validatePassword(password) {
+      if (password.length < 8 || password === password.toLowerCase()) {
+        return false;
+      }
+    }
+
+    const validEmail = validateEmail.test(loginInformation.email);
+    const validPassword = validatePassword(loginInformation.password);
+
+    if (!validEmail || !validPassword) {
+      return showMessage(setMessage, 'Email ou senha em formato incorreto.');
+    }
+
     const options = {
       method: 'POST',
       body: JSON.stringify(loginInformation)
