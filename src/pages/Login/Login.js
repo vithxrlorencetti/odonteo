@@ -30,8 +30,6 @@ function Login() {
     const validEmail = validateEmail.test(loginInformation.email);
     const validPassword = validatePassword(loginInformation.password);
 
-    console.log(validEmail, validPassword);
-
     if (!validEmail || !validPassword) {
       return showMessage(setMessage, 'Email ou senha em formato incorreto.');
     }
