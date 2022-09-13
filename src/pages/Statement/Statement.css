@@ -1,0 +1,13 @@
+.statement {
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-button {
+  background-color: red;
+  border: none;
+  padding: 0px 4px 0.5px 4px;
+  align-self: flex-end;
+  cursor: pointer;
+}

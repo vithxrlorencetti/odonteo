@@ -25,7 +25,11 @@ function Statement() {
         method: 'GET'
       }
   
-      const { income } = await fetchApi(`https://odonteo-backend.herokuapp.com/income/${user.id}`, options, true);
+      const { income } = await fetchApi(
+        `https://odonteo-backend.herokuapp.com/income/${user.id}`,
+        options,
+        true
+      );
   
       setIncomeDetails(income);
     }
@@ -38,10 +42,14 @@ function Statement() {
     setTotalIncome(0);
 
     incomeDetails.forEach(({ dates, installmentValue }) => {
-      const datesInInterval = JSON.parse(dates).filter((date) => Date.parse(date) >= Date.parse(beginningDate) && Date.parse(date) <= Date.parse(endingDate));
+      const datesInInterval = JSON.parse(dates)
+        .filter((date) => {
+          return Date.parse(date) >= Date.parse(beginningDate)
+            && Date.parse(date) <= Date.parse(endingDate)
+        });
+
       setTotalIncome((oldState) => {
-        console.log(oldState);
-        return Math.floor((oldState + (datesInInterval.length * JSON.parse(installmentValue))) * 100) / 100;
+        return oldState + (datesInInterval.length * JSON.parse(installmentValue));
       });
     });
 
@@ -79,18 +87,31 @@ function Statement() {
         </Button>
       </form>
       {renderStatement &&
-        <table className='statement'>
-          <thead>
-            <tr>
-              <th>total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{totalIncome}</td>
-            </tr>
-          </tbody>
-        </table>}
+        <div className='statement'>
+          <button
+            className='close-button'
+            onClick={() => setRenderStatement(false)}
+          >
+            x
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL'
+                  }).format(totalIncome)}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>}
       <Button
         id='go-back-button'
         onClickFunction={() => navigate('/')}
