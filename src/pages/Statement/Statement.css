@@ -10,4 +10,11 @@
   padding: 0px 4px 0.5px 4px;
   align-self: flex-end;
   cursor: pointer;
+  margin-bottom: 2px;
+}
+
+@media only screen and (max-height: 568px) {
+  .statement {
+    margin-top: 25px;
+  }
 }
