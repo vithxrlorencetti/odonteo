@@ -38,9 +38,14 @@ function Main() {
 
   function isInformationValid() {
     const validAmount = Number(paymentAmount) > 0;
-    const validInstallmentNum = Number(numberOfInstallments) > 0 && Number.isInteger(Number(numberOfInstallments));
-    let validBillingDay = Number(billingDay) > 0 && Number(billingDay) < 32 && Number.isInteger(Number(billingDay));
-    const validInstallmentDate = firstInstallmentDate && Number(firstInstallmentDate.split('-')[0]) >= 1960;
+    const validInstallmentNum = Number(numberOfInstallments) > 0
+      && Number.isInteger(Number(numberOfInstallments));
+
+    let validBillingDay = Number(billingDay) > 0 && Number(billingDay) < 32
+      && Number.isInteger(Number(billingDay));
+
+    const validInstallmentDate = firstInstallmentDate
+      && Number(firstInstallmentDate.split('-')[0]) >= 1960;
 
     if (numberOfInstallments === '1') {
       validBillingDay = true;
@@ -73,8 +78,11 @@ function Main() {
         body: JSON.stringify(body)
       }
 
-      text = await fetchApi('https://odonteo-backend.herokuapp.com/income', options, true)
-        .then(({ message }) => message);
+      text = await fetchApi(
+        'https://odonteo-backend.herokuapp.com/income',
+        options,
+        true
+      ).then(({ message }) => message);
 
       if (text === 'Registro efetuado com sucesso!') {
         status = 'success';
