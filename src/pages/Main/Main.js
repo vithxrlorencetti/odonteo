@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Message from '../../components/Message/Message';
+import isAuthenticated from '../../utils/auth';
 import fetchApi from '../../utils/fetch';
 import { handleChange } from '../../utils/handleChange';
 import parseInstallmentDetails from '../../utils/parseInstallmentDetails';
@@ -28,6 +29,12 @@ function Main() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate('/login');
+    }
+  }, [navigate]);
 
   function isInformationValid() {
     const validAmount = Number(paymentAmount) > 0;

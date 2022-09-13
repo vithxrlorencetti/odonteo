@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button/Button';
+import isAuthenticated from '../../utils/auth';
 import fetchApi from '../../utils/fetch';
 import { handleChange } from '../../utils/handleChange';
 import './Statement.css';
@@ -15,6 +16,10 @@ function Statement() {
   const user = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
+    if (!isAuthenticated()) {
+      navigate('/login');
+    }
+
     async function getIncome() {
       const options = {
         method: 'GET'
@@ -26,7 +31,7 @@ function Statement() {
     }
 
     getIncome();
-  }, [user]);
+  }, [user, navigate]);
 
   function checkIncome() {
     const { beginningDate, endingDate } = datesOfStatement;
