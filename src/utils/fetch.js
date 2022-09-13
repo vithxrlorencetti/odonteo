@@ -1,6 +1,10 @@
-export default function fetchApi(path, options) {
+export default function fetchApi(path, options, sendToken) {
   const headers = {
     'Content-Type': 'application/json'
+  }
+
+  if (sendToken) {
+    headers.authorization = JSON.parse(localStorage.getItem('token'));
   }
 
   const optionsWithHeaders = {

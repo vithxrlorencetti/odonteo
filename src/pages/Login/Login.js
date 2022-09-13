@@ -23,10 +23,14 @@ function Login() {
       if (password.length < 8 || password === password.toLowerCase()) {
         return false;
       }
+
+      return true;
     }
 
     const validEmail = validateEmail.test(loginInformation.email);
     const validPassword = validatePassword(loginInformation.password);
+
+    console.log(validEmail, validPassword);
 
     if (!validEmail || !validPassword) {
       return showMessage(setMessage, 'Email ou senha em formato incorreto.');
@@ -37,11 +41,12 @@ function Login() {
       body: JSON.stringify(loginInformation)
     }
 
-    const { user, message: apiMessage } = await fetchApi('https://odonteo-backend.herokuapp.com/login', options);
+    const { user, message: apiMessage, token } = await fetchApi('https://odonteo-backend.herokuapp.com/login', options);
 
     
     if (apiMessage === 'Login efetuado com sucesso!') {
       localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('token', JSON.stringify(token));
       navigate('/');
     } else {
       showMessage(setMessage, apiMessage);

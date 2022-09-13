@@ -20,7 +20,7 @@ function Statement() {
         method: 'GET'
       }
   
-      const { income } = await fetchApi(`https://odonteo-backend.herokuapp.com/income/${user.id}`, options);
+      const { income } = await fetchApi(`https://odonteo-backend.herokuapp.com/income/${user.id}`, options, true);
   
       setIncomeDetails(income);
     }

@@ -65,7 +65,7 @@ function Main() {
         body: JSON.stringify(body)
       }
 
-      text = await fetchApi('https://odonteo-backend.herokuapp.com/income', options)
+      text = await fetchApi('https://odonteo-backend.herokuapp.com/income', options, true)
         .then(({ message }) => message);
     }
 
