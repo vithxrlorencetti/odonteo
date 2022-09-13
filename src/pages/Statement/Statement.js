@@ -39,7 +39,10 @@ function Statement() {
 
     incomeDetails.forEach(({ dates, installmentValue }) => {
       const datesInInterval = JSON.parse(dates).filter((date) => Date.parse(date) >= Date.parse(beginningDate) && Date.parse(date) <= Date.parse(endingDate));
-      setTotalIncome((oldState) => Math.floor(oldState + (datesInInterval.length * installmentValue) * 100) / 100);
+      setTotalIncome((oldState) => {
+        console.log(oldState);
+        return Math.floor((oldState + (datesInInterval.length * JSON.parse(installmentValue))) * 100) / 100;
+      });
     });
 
     setRenderStatement(true);
@@ -76,7 +79,7 @@ function Statement() {
         </Button>
       </form>
       {renderStatement &&
-        <table>
+        <table className='statement'>
           <thead>
             <tr>
               <th>total</th>
