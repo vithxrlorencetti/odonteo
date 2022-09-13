@@ -24,7 +24,7 @@ function Main() {
     firstInstallmentDate
   } = incomeInformation;
 
-  const [message, setMessage] = useState({ show: false, text: '' });
+  const [message, setMessage] = useState({ show: false, text: '', status: '' });
 
   const user = JSON.parse(localStorage.getItem('user'));
 
@@ -51,6 +51,7 @@ function Main() {
 
   async function register() {
     let text = 'Informações em formato incorreto.';
+    let status = 'error';
 
     if (isInformationValid()) {
       const installmentDetails = parseInstallmentDetails(
@@ -74,15 +75,19 @@ function Main() {
 
       text = await fetchApi('https://odonteo-backend.herokuapp.com/income', options, true)
         .then(({ message }) => message);
+
+      if (text === 'Registro efetuado com sucesso!') {
+        status = 'success';
+      }
     }
 
-    showMessage(setMessage, text);
+    showMessage(setMessage, text, status);
   }
 
   return (
     <main>
       { message.show &&
-        <Message>
+        <Message addClass={message.status}>
           {message.text}
         </Message>
       }

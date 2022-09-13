@@ -2,7 +2,6 @@ import jwt_decode from "jwt-decode";
 
 export default function isAuthenticated() {
   const token = JSON.parse(localStorage.getItem('token'));
-  console.log(token);
 
   if (!token) {
     return false;

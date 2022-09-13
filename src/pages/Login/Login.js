@@ -11,7 +11,7 @@ function Login() {
     email: '',
     password: ''
   });
-  const [message, setMessage] = useState({ show: false, text: '' });
+  const [message, setMessage] = useState({ show: false, text: '', status: '' });
 
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ function Login() {
     const validPassword = validatePassword(loginInformation.password);
 
     if (!validEmail || !validPassword) {
-      return showMessage(setMessage, 'Email ou senha em formato incorreto.');
+      return showMessage(setMessage, 'Email ou senha em formato incorreto.', 'error');
     }
 
     const options = {
@@ -40,21 +40,20 @@ function Login() {
     }
 
     const { user, message: apiMessage, token } = await fetchApi('https://odonteo-backend.herokuapp.com/login', options);
-
     
     if (apiMessage === 'Login efetuado com sucesso!') {
       localStorage.setItem('user', JSON.stringify(user));
       localStorage.setItem('token', JSON.stringify(token));
       navigate('/');
     } else {
-      showMessage(setMessage, apiMessage);
+      showMessage(setMessage, apiMessage, 'error');
     }
   }
 
   return (
     <main>
       { message.show &&
-        <Message>
+        <Message addClass={message.status}>
           {message.text}
         </Message>
       }

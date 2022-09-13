@@ -1,8 +1,8 @@
 import './Message.css';
 
-function Message({ children }) {
+function Message({ children, addClass }) {
   return (
-    <div>
+    <div className={`message ${addClass}`}>
       <p>{ children }</p>
     </div>
   );

@@ -1,0 +1,99 @@
+.message {
+  position: absolute;
+  bottom: 70px;
+  right: 100px;
+  padding: 8px;
+  border-radius: 20px;
+}
+
+.success {
+  background-color: #549e9ca6;
+}
+
+.error {
+  background-color: #ed0c8077;
+}
+
+@media only screen and (max-width: 414px) {
+  .message {
+    right: auto;
+    bottom: 135px;
+  }
+}
+
+@media only screen and (max-width: 411px) {
+  .message {
+    right: auto;
+    bottom: 175px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .message {
+    right: auto;
+    bottom: 100px;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .message {
+    right: auto;
+    bottom: 85px;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .message {
+    right: auto;
+    bottom: 20px;
+  }
+}
+
+@media only screen and (max-width: 280px) {
+  .message {
+    right: auto;
+    bottom: 75px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .success {
+    background-color: #549E9C;
+  }
+  
+  .error {
+    background-color: #ed0c80;
+  }
+}
+
+@media only screen and (min-height: 720px) {
+  .message {
+    right: auto;
+    bottom: 135px;
+  }
+}
+
+@media only screen and (min-height: 731px) {
+  .message {
+    bottom: 135px;
+  }
+}
+
+@media only screen and (min-height: 812px) {
+  .message {
+    bottom: 170px;
+  }
+}
+
+@media only screen and (min-height: 823px) {
+  .message {
+    bottom: 170px;
+  }
+}
+
+@media only screen and (min-height: 1024px) {
+  .message {
+    bottom: 135px;
+  }
+}
+
