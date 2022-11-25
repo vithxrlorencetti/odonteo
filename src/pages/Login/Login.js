@@ -55,7 +55,7 @@ function Login() {
   }
 
   return (
-    <main>
+    <main data-testid='test-login'>
       { message.show &&
         <Message addClass={message.status}>
           {message.text}
@@ -65,6 +65,7 @@ function Login() {
         <label htmlFor='email'>
           Email:
           <input
+            data-testid='test-email'
             className='form-input'
             id='email'
             name='email'
@@ -75,6 +76,7 @@ function Login() {
         <label htmlFor='password'>
           Senha:
           <input
+            data-testid='test-password'
             className='form-input'
             id='password'
             name='password'
@@ -83,6 +85,7 @@ function Login() {
           />
         </label>
         <Button
+          data-testid='test-loginButton'
           addClassName='form-button'
           onClickFunction={makeLogin}
         >
